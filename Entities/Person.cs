@@ -12,5 +12,6 @@ namespace Entities
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public ContactInformation ContactInformation { get; set; }
+        public int AddressFK { get; set; }
     }
 }

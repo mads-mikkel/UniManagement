@@ -90,17 +90,20 @@ namespace DataAccess
                 string firstname = (string)reader[1];
                 string lastname = (string)reader[2];
 
-                // This is the FK
+                // This is the contact info FK
                 int contactInformation_FKid = (int)reader[3];
+
+                // This is the address FK
+                int address_FKid = (int)reader[4];
 
                 // The aggregated contact information object. Initialize to null:
                 ContactInformation contactInformation = null;
 
                 // Loop through all the contact information objects in the contact informations list, that we got before from the database:
-                for(int i = 0; i < contactInformations.Count; i++)
+                for (int i = 0; i < contactInformations.Count; i++)
                 {
                     // If there is a match in the retrieved person row's FK value,
-                    if(contactInformation_FKid == contactInformations[i].Id)
+                    if (contactInformation_FKid == contactInformations[i].Id)
                     {
                         // then assign the object from the list, to the property on the person object, thereby making the OOP aggregation:
                         contactInformation = contactInformations[i];
@@ -116,7 +119,8 @@ namespace DataAccess
                     Id = id,
                     Firstname = firstname,
                     Lastname = lastname,
-                    ContactInformation = contactInformation
+                    ContactInformation = contactInformation,
+                    AddressFK = address_FKid
                 };
 
                 // Add the retrieved person to the list of persons:
@@ -125,6 +129,76 @@ namespace DataAccess
 
             // Return the list of Persons:
             return persons;
+        }
+
+        public List<Address> GetAllAddresses()
+        {
+            // A list to hold all addresses. This is the list this method will return:
+            List<Address> addresses = new();
+
+            // Get all persons from the database:
+            List<Person> persons = GetAllPersons();
+
+            // Get all addresses from the database:
+            SqlConnection connection = new(connectionString);
+            connection.Open();
+            string sql = "SELECT * FROM Addresses";
+            SqlCommand command = new(sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            // Handle data:
+            while (reader.Read())
+            {
+                int addressId = (int)reader[0];
+                string streetName = (string)reader[1];
+                string streetNumber = (string)reader[2];
+                string zip = (string)reader[3];
+                string city = (string)reader[4];
+                string country = (string)reader[5];
+
+                Address a = new()
+                {
+                    Id = addressId,
+                    StreetName = streetName,
+                    StreetNumber = streetNumber,
+                    Zip = zip,
+                    City = city,
+                    Country = country,
+                    People = new()
+                };
+
+                addresses.Add(a);
+            }
+            connection.Close();
+
+            Aggregate(persons, addresses);
+
+            // Return the list of addresses:
+            return addresses;
+        }
+
+        private void Aggregate(List<Person> persons, List<Address> addresses)
+        {
+            // Loop over all persons:
+            for (int i = 0; i < persons.Count; i++)
+            {
+                // Check whether or not the person has an address:
+                if (persons[i].AddressFK != 0)
+                {
+                    // If true, then loop over all addresses:
+                    for (int j = 0; j < addresses.Count; j++)
+                    {
+                        // Find the right match between person and address.
+                        // NOTE: there could be more than perons living at the
+                        // address, therefore we shall not break out of the inner loop:
+                        if (persons[i].AddressFK == addresses[j].Id)
+                        {
+                            // Add the person to the list of poeple living at the address:
+                            addresses[j].People.Add(persons[i]);
+                        }
+                    }
+                }
+            }
         }
 
         public void AddNewContactInformation(ContactInformation contactInformationToAdd)

@@ -41,6 +41,8 @@ namespace Gui
             // Get all contact infos from database
             List<ContactInformation> contactInformations = repo.GetAllContactInformations();
 
+            List<Address> allAddressesWithPeople = repo.GetAllAddresses();
+
             // Load contact infos into the listbox:
         }
 
