@@ -131,6 +131,22 @@ namespace DataAccess
             return persons;
         }
 
+        public void Update(Person editedPerson)
+        {
+            // Make SQL:
+            string sql = "";
+            string personUpdateSql = $"UPDATE Persons SET Firstname = '{editedPerson.Firstname}', Lastname = '{editedPerson.Lastname}' WHERE PersonId = {editedPerson.Id}";
+            string contactInfoUpdateSql = $"UPDATE ContactInformations SET Mail = '{editedPerson.ContactInformation.Mail}', PhoneNumber = '{editedPerson.ContactInformation.PhoneNumber}' WHERE ContactInformationId = {editedPerson.ContactInformation.Id}";
+            sql = $"{personUpdateSql};{contactInfoUpdateSql};";
+
+            // Execute query:
+            SqlConnection connection = new(connectionString);
+            connection.Open();
+            SqlCommand command = new(sql, connection);
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
         public List<Address> GetAllAddresses()
         {
             // A list to hold all addresses. This is the list this method will return:

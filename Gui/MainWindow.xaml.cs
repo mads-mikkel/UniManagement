@@ -23,6 +23,7 @@ namespace Gui
     public partial class MainWindow : Window
     {
         private Repository repo;
+        private List<Person> persons;
 
         public MainWindow()
         {
@@ -43,7 +44,9 @@ namespace Gui
 
             List<Address> allAddressesWithPeople = repo.GetAllAddresses();
 
-            // Load contact infos into the listbox:
+            // Load contact infos into the datagrid:
+            persons = repo.GetAllPersons();
+            dg.ItemsSource = persons;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -61,6 +64,21 @@ namespace Gui
 
             // Call the repository:
             repo.AddNewContactInformation(contactInformation);
+        }
+
+        private void dg_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dg.SelectedIndex > 0)
+            {
+                Person editedPerson = dg.Items[dg.SelectedIndex - 1] as Person;
+                if (editedPerson != null)
+                {
+                    repo.Update(editedPerson);
+                    //persons = repo.GetAllPersons();
+                    //dg.ItemsSource = null;
+                    //dg.ItemsSource = persons;
+                }
+            }
         }
     }
 }

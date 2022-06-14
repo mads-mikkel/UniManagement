@@ -5,9 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="623"
+        Width="879">
     <Grid>
-        <Button Content="Gem"
+        <DataGrid Name="dg"
+                  AutoGenerateColumns="False"
+                  Height="500"
+                  Width="500"
+                  HorizontalAlignment="Left"
+                  Margin="5"
+                  SelectionChanged="dg_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Fornavn"
+                                    Binding="{Binding Firstname}" />
+                <DataGridTextColumn Header="Efternavn"
+                                    Binding="{Binding Lastname}" />
+                <DataGridTextColumn Header="Email"
+                                    Binding="{Binding ContactInformation.Mail}" />
+                <DataGridTextColumn Header="Telefonnr."
+                                    Binding="{Binding ContactInformation.PhoneNumber}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Visibility="Collapsed" Content="Gem"
                 Height="30"
                 Width="75"
                 Click="Button_Click" />
