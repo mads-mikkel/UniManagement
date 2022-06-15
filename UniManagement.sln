@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32428.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gui", "Gui\Gui.csproj", "{D02015FF-A3C4-4F0D-9A9B-4DEC434753C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gui", "Gui\Gui.csproj", "{D02015FF-A3C4-4F0D-9A9B-4DEC434753C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{DBC714F1-D16D-4A04-BE6C-9D4330C078F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{DBC714F1-D16D-4A04-BE6C-9D4330C078F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{855CFD9F-E119-4FF7-B932-1613340072CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{855CFD9F-E119-4FF7-B932-1613340072CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{4149C711-EEC7-4A49-9C50-79462B814A1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{855CFD9F-E119-4FF7-B932-1613340072CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{855CFD9F-E119-4FF7-B932-1613340072CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{855CFD9F-E119-4FF7-B932-1613340072CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4149C711-EEC7-4A49-9C50-79462B814A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4149C711-EEC7-4A49-9C50-79462B814A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4149C711-EEC7-4A49-9C50-79462B814A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4149C711-EEC7-4A49-9C50-79462B814A1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
