@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using DataAccess;
+using Entities;
 
 namespace Tests
 {
@@ -21,6 +22,19 @@ namespace Tests
 
             //
             Assert.NotNull(repo);
+        }
+
+        [Fact]
+        public void GetAllPersonsReturnsDataTest()
+        {
+            // Arrange:
+            Repository repo = new();
+
+            // Act:
+            List<Person> people = repo.GetAllPersons();
+
+            // Assert:
+            Assert.True(people.Count > 0);
         }
     }
 }
