@@ -21,11 +21,17 @@ namespace Services
             // Deserialize the data, i.e. convert the JSON to C# objects:
             Root rootData = JsonConvert.DeserializeObject<Root>(json);
 
-            // Get the specific data, like weather decription and temperature:
+            // Get the specific temperature:
             double temperature = rootData.list[0].main.temp;
 
+            // Get the specifik weather description:
+            string desc = rootData.list[0].weather[0].description;
+
+            // Get the icon:
+            string icon = rootData.list[0].weather[0].icon;
+
             // Return the weather:
-            return $"{temperature - 273.15:f1} °C";
+            return $"{desc}, {temperature - 273.15:f1} °C";
         }
     }
 
