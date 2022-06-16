@@ -19,6 +19,7 @@ namespace Tests
 
             // Assert:
             Assert.True(contactInformation.Id > 0);
+            Assert.Contains("@", contactInformation.Mail);
         }
     }
 }
