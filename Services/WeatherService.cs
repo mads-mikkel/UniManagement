@@ -10,7 +10,7 @@ namespace Services
         public string GetWeather()
         {
             // URL to the API:
-            string url = "https://api.openweathermap.org/data/2.5/forecast?id=2610613&appid=9a55bba0468de75de54e23b456f4f814";
+            string url = "https://api.openweathermap.org/data/2.5/forecast?id=2610613&appid=goGetYourOwn";
 
             // Create a web client:
             WebClient client = new();
